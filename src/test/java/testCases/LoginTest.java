@@ -34,6 +34,7 @@ public class LoginTest extends BaseTest{
 			logger.info("*********Clicked on Login Submit*************");
 			
 			MyAccountPage map = new MyAccountPage(getDriver());
+			
 			String actualHeading = map.getHeading();
 			
 			String expectedHeading = "My Account";

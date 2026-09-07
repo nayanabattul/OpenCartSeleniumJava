@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import utilities.CustomWaits;
+
 public class MyAccountPage extends BasePage{
 	
 	public MyAccountPage(WebDriver driver) {
@@ -14,6 +16,8 @@ public class MyAccountPage extends BasePage{
 	WebElement txtHeadingMyAccount;
 	
 	public String getHeading() {
+		
+		CustomWaits.waitForTheElement(txtHeadingMyAccount);
 		return txtHeadingMyAccount.getText();
 	}
 

@@ -1,0 +1,23 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Maven
+target/
+
+# TestNG reports
+test-output/
+
+# Logs
+logs/
+
+# Screenshots
+Screenshots/
+
+testData/
+# Java compiled files
+*.class
+
+# Configuration / sensitive files
+src/test/resources/config.properties

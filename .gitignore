@@ -20,4 +20,4 @@ testData/
 *.class
 
 # Configuration / sensitive files
-src/test/resources/config.properties
+#src/test/resources/config.properties

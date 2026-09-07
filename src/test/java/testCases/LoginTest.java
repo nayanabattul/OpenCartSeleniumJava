@@ -10,6 +10,7 @@ import pageObjects.LandingPage;
 import pageObjects.MyAccountPage;
 
 import testbase.BaseTest;
+import utilities.ConfigReader;
 
 public class LoginTest extends BaseTest{
 
@@ -23,9 +24,11 @@ public class LoginTest extends BaseTest{
 			hp.clickMyAccount();
 			hp.clickLogin();
 			logger.info("*********Clicked on Login*************");
-			hp.typeEmail(p.getProperty("email"));
+			//hp.typeEmail(p.getProperty("email"));
+			hp.typeEmail(ConfigReader.getValidUsername());
 			logger.info("*********Entered Email*************");
-			hp.typePassword(p.getProperty("password"));
+			//hp.typePassword(p.getProperty("password"));
+			hp.typePassword(ConfigReader.getValidPassword());
 			logger.info("*********Entered Password*************");
 			hp.clickLoginSubmit();
 			logger.info("*********Clicked on Login Submit*************");
@@ -35,18 +38,17 @@ public class LoginTest extends BaseTest{
 			
 			String expectedHeading = "My Account";
 			
-			if(actualHeading.equals(expectedHeading)) {
-				logger.info("*********Login Test Passed*************");
-				Assert.assertTrue(true);
-			} else {
-				logger.error("*********Login Test Failed*************");
-				Assert.fail();
-			}
+			 Assert.assertEquals(actualHeading, expectedHeading,
+		                "Login was not successful");
+
+		        logger.info("*********Login Test Passed*********");
+
 			
 			
 		} catch (Exception e) {
 			
-			Assert.fail();
+			 logger.error("Login test failed: " + e.getMessage(), e);
+			    Assert.fail("Login test failed: " + e.getMessage());
 		}
 		
 		logger.info("*********Finished Test Case*************");

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
@@ -39,7 +40,14 @@ public class BaseTest {
 		logger = LogManager.getLogger(this.getClass());
 		switch(br.toLowerCase()) {
 		case "chrome": 
-			driver.set(new ChromeDriver()); 
+			ChromeOptions options = new ChromeOptions(); // Check whether the test is running in CI 
+			String ci = System.getenv("CI"); 
+			if (ci != null && ci.equalsIgnoreCase("true")) { 
+				options.addArguments("--headless=new"); 
+				options.addArguments("--no-sandbox"); 
+				options.addArguments("--disable-dev-shm-usage"); 
+				}
+			driver.set(new ChromeDriver(options)); 
 			break;
 			
 		case "firefox": 
@@ -59,8 +67,8 @@ public class BaseTest {
 		
 		
 		getDriver().manage().deleteAllCookies();
-		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(600));
-		Thread.sleep(10000);
+		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		//Thread.sleep(10000);
 		getDriver().get(p.getProperty("appURL2"));
 		getDriver().manage().window().maximize();
 		Thread.sleep(10000);

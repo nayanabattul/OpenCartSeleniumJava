@@ -1,0 +1,33 @@
+name: Selenium Tests
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Run Selenium Tests
+        env:
+          VALID_USERNAME: ${{ secrets.VALID_USERNAME }}
+          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
+          INVALID_USERNAME: ${{ secrets.INVALID_USERNAME }}
+          INVALID_PASSWORD: ${{ secrets.INVALID_PASSWORD }}
+
+        run: mvn clean test

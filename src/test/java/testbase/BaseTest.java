@@ -15,7 +15,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 public class BaseTest {
@@ -29,7 +31,7 @@ public class BaseTest {
 		return driver.get();
 	}
 	
-	@BeforeClass
+	@BeforeMethod
 	@Parameters("browser")
 	public void setup(String br) throws InterruptedException, IOException {
 		
@@ -95,7 +97,7 @@ public class BaseTest {
 	}
 	
 	
-	@AfterClass
+	@AfterMethod
 	public void tearDown() {
 		if (getDriver() != null) {
 

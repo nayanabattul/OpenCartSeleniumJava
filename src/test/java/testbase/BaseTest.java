@@ -1,7 +1,9 @@
 package testbase;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -33,9 +35,27 @@ public class BaseTest {
 		
 		//loading config.properties file
 		
-		FileReader file = new FileReader("./src//test//resources//config.properties");
-		p=new Properties();
-		p.load(file);
+//		FileReader file = new FileReader("./src//test//resources//config.properties");
+//		p=new Properties();
+//		p.load(file);
+		
+		p = new Properties();
+		
+		System.out.println("Resource URL: " +
+		        getClass().getClassLoader().getResource("config.properties"));
+
+	    try (InputStream input = getClass()
+	            .getClassLoader()
+	            .getResourceAsStream("config.properties")) {
+
+	        if (input == null) {
+	            throw new FileNotFoundException(
+	                "config.properties not found in src/test/resources"
+	            );
+	        }
+
+	        p.load(input);
+	    }
 		
 		logger = LogManager.getLogger(this.getClass());
 		switch(br.toLowerCase()) {

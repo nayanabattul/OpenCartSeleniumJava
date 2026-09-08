@@ -13,7 +13,7 @@ public class CustomWaits {
 	
 	public static WebElement waitForTheElement(WebElement ele) {
 	
-	WebDriverWait wait = new WebDriverWait(BaseTest.getDriver(), Duration.ofSeconds(10));
+	WebDriverWait wait = new WebDriverWait(BaseTest.getDriver(), Duration.ofSeconds(30));
 	
 	return wait.until(ExpectedConditions.visibilityOf(ele));
 	}

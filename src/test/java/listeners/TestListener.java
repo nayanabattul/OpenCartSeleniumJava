@@ -19,6 +19,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 
 import testbase.BaseTest;
 import utilities.ExtentManager;
+import utilities.SlackUtil;
 
 public class TestListener implements ITestListener {
 
@@ -124,6 +125,31 @@ public void onTestSkipped(ITestResult result) {
 public void onFinish(ITestContext context) {
 
     extent.flush();
+
+    int totalTests = context.getAllTestMethods().length;
+    int passedTests = context.getPassedTests().size();
+    int failedTests = context.getFailedTests().size();
+    int skippedTests = context.getSkippedTests().size();
+    int retryCount = context.getFailedTests().size();
+
+    String status;
+
+    if (failedTests > 0) {
+        status = "❌ FAILED";
+    } else {
+        status = "✅ PASSED";
+    }
+
+    String message =
+            "🚀 *Selenium Automation Execution*\n\n"
+            + "Suite: " + context.getName() + "\n\n"
+            + "Total Tests: " + totalTests + "\n"
+            + "Passed: " + passedTests + "\n"
+            + "Failed: " + failedTests + "\n"
+            + "Skipped: " + skippedTests + "\n\n"
+            + "Status: " + status;
+
+    SlackUtil.sendMessage(message);
 
     test.remove();
 }

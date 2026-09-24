@@ -43,7 +43,7 @@ public class MyAccountPage extends BasePage{
 	}
 	
 	
-	@FindBy(xpath="//span[text()='Add to Cart']")
+	@FindBy(xpath="//span[normalize-space()='Add to Cart']")
 	public WebElement btnAddToCart;
 	
 	

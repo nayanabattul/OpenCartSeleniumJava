@@ -18,6 +18,13 @@ public class CustomWaits {
 	return wait.until(ExpectedConditions.visibilityOf(ele));
 	}
 	
+	public static WebElement waitForTheElementToBeClickable(WebElement ele) {
+		
+		WebDriverWait wait = new WebDriverWait(BaseTest.getDriver(), Duration.ofSeconds(30));
+		
+		return wait.until(ExpectedConditions.elementToBeClickable(ele));
+		}	
+	
 	
 
 }

@@ -37,7 +37,7 @@ public class MyAccountPage extends BasePage{
 	public WebElement lnkMacDesktops;
 
 	public void clickElement(WebElement ele) {
-		CustomWaits.waitForTheElement(ele);
+		CustomWaits.waitForTheElementToBeClickable(ele);
 		ele.click();
 		
 	}

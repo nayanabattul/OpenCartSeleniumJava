@@ -11,7 +11,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
     private int retryCount = 0;
 
     // Maximum retries allowed for each test
-    private static final int MAX_RETRY_COUNT = 2;
+    private static final int MAX_RETRY_COUNT = 0;
 
     // Tracks total retries across the entire suite
     private static final AtomicInteger TOTAL_RETRIES = new AtomicInteger(0);

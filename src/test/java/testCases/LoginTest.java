@@ -1,17 +1,12 @@
 package testCases;
 
-import org.jboss.aerogear.security.otp.Totp;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import pageObjects.HomePage;
-import pageObjects.LandingPage;
-
 import pageObjects.MyAccountPage;
-
 import testbase.BaseTest;
 import utilities.ConfigReader;
-import utilities.SlackUtil;
 
 public class LoginTest extends BaseTest{
 

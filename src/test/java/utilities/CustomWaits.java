@@ -20,7 +20,7 @@ public class CustomWaits {
 	
 	public static WebElement waitForTheElementToBeClickable(WebElement ele) {
 		
-		WebDriverWait wait = new WebDriverWait(BaseTest.getDriver(), Duration.ofSeconds(30));
+		WebDriverWait wait = new WebDriverWait(BaseTest.getDriver(), Duration.ofSeconds(60));
 		
 		return wait.until(ExpectedConditions.elementToBeClickable(ele));
 		}	

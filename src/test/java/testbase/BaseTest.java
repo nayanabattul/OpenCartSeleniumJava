@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -92,6 +93,8 @@ public class BaseTest {
 		//Thread.sleep(10000);
 		getDriver().get(p.getProperty("appURL2"));
 		getDriver().manage().window().maximize();
+		Dimension size = getDriver().manage().window().getSize();
+		System.out.println("Browser window size: " + size.getWidth() + "x" + size.getHeight());
 		Thread.sleep(10000);
 	}
 	

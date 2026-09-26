@@ -62,9 +62,9 @@ public class BaseTest {
 			ChromeOptions options = new ChromeOptions(); // Check whether the test is running in CI 
 			String ci = System.getenv("CI"); 
 			if (ci != null && ci.equalsIgnoreCase("true")) { 
-				//options.addArguments("--headless=new"); 
-//				options.addArguments("--no-sandbox"); 
-//				options.addArguments("--disable-dev-shm-usage");
+				options.addArguments("--headless=new"); 
+				options.addArguments("--no-sandbox"); 
+				options.addArguments("--disable-dev-shm-usage");
 				options.addArguments("--window-size=1920,1080"); // Forces full HD resolution
 				options.addArguments("--start-maximized");
 				}

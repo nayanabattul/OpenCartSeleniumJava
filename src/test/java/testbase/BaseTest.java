@@ -63,11 +63,11 @@ public class BaseTest {
 			ChromeOptions options = new ChromeOptions(); // Check whether the test is running in CI 
 			String ci = System.getenv("CI"); 
 			if (ci != null && ci.equalsIgnoreCase("true")) { 
-				options.addArguments("--headless=new"); 
-				options.addArguments("--no-sandbox"); 
+				options.addArguments("--headless=new");
+				options.addArguments("--window-size=1920,1080");
+				options.addArguments("--disable-gpu");
+				options.addArguments("--no-sandbox");
 				options.addArguments("--disable-dev-shm-usage");
-				options.addArguments("--window-size=1920,1080"); // Forces full HD resolution
-				options.addArguments("--start-maximized");
 				}
 			driver.set(new ChromeDriver(options)); 
 			break;
@@ -93,6 +93,7 @@ public class BaseTest {
 		//Thread.sleep(10000);
 		getDriver().get(p.getProperty("appURL2"));
 		getDriver().manage().window().maximize();
+		getDriver().manage().window().setSize(new Dimension(1920, 1080));
 		Dimension size = getDriver().manage().window().getSize();
 		System.out.println("Browser window size: " + size.getWidth() + "x" + size.getHeight());
 		Thread.sleep(10000);

@@ -59,7 +59,7 @@ public class MyAccountPage extends BasePage{
 		return ele.getText();
 	}
 	
-	@FindBy(xpath="//a[contains(text(),'shopping cart')]")
+	@FindBy(xpath="//a[normalize-space()='shopping cart']")
 	public WebElement lnkShoppingCart;
 	
 	

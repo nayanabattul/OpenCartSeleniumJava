@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-failure-screenshots
-          path: target/screenshots/ # Replace with the actual path where your framework saves screenshots
+          path: test-output/screenshots/ # Replace with the actual path where your framework saves screenshots

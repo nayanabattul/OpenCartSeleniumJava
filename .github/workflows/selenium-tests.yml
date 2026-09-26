@@ -9,26 +9,17 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: '17'
-		  
-		- name: Upload Screenshots on Failure
-		    if: failure() # Runs only if a previous step in the job failed
-		    uses: actions/upload-artifact@v4
-		    with:
-		      name: test-failure-screenshots
-		      path: path/to/your/screenshots/folder/ # e.g., target/screenshots, test-results/, etc.
 
       - name: Run Selenium Tests
         env:
@@ -36,5 +27,11 @@ jobs:
           VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
           INVALID_USERNAME: ${{ secrets.INVALID_USERNAME }}
           INVALID_PASSWORD: ${{ secrets.INVALID_PASSWORD }}
-
         run: mvn clean test
+
+      - name: Upload Screenshots on Failure
+        if: failure() # Runs only if the test execution step fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-failure-screenshots
+          path: target/screenshots/ # Replace with the actual path where your framework saves screenshots

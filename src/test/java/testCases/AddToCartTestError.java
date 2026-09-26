@@ -7,6 +7,7 @@ import pageObjects.HomePage;
 import pageObjects.MyAccountPage;
 import testbase.BaseTest;
 import utilities.ConfigReader;
+import utilities.ScrollToElement;
 
 public class AddToCartTestError extends BaseTest {
 	
@@ -31,6 +32,8 @@ public class AddToCartTestError extends BaseTest {
 	 
 	 map.clickElement(map.lnkMacDesktops);
 	 
+	 ScrollToElement scroll = new ScrollToElement();
+	 scroll.scrollToElement(map.btnAddToCart);
 	 map.clickElement(map.btnAddToCart);
 	 String actualMessage = map.getMessage(map.txtSuccessMessage);
 	 

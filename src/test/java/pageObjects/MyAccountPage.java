@@ -1,10 +1,12 @@
 package pageObjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import testbase.BaseTest;
 import utilities.CustomWaits;
 
 public class MyAccountPage extends BasePage{
@@ -38,6 +40,8 @@ public class MyAccountPage extends BasePage{
 
 	public void clickElement(WebElement ele) {
 		CustomWaits.waitForTheElementToBeClickable(ele);
+		((JavascriptExecutor) BaseTest.getDriver())
+        .executeScript("arguments[0].scrollIntoView({block: 'center'});", ele);
 		ele.click();
 		
 	}

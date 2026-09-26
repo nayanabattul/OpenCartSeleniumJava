@@ -34,6 +34,8 @@ public class AddToCartTestError extends BaseTest {
 	 
 	 //ScrollToElement scroll = new ScrollToElement();
 	 //scroll.scrollToElement(map.btnAddToCart);
+	 
+	 
 	 map.clickElement(map.btnAddToCart);
 	 String actualMessage = map.getMessage(map.txtSuccessMessage);
 	 

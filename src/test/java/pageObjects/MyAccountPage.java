@@ -40,8 +40,8 @@ public class MyAccountPage extends BasePage{
 
 	public void clickElement(WebElement ele) {
 		CustomWaits.waitForTheElementToBeClickable(ele);
-		((JavascriptExecutor) BaseTest.getDriver())
-        .executeScript("arguments[0].scrollIntoView({block: 'center'});", ele);
+//		((JavascriptExecutor) BaseTest.getDriver())
+//        .executeScript("arguments[0].scrollIntoView({block: 'center'});", ele);
 		ele.click();
 		
 	}

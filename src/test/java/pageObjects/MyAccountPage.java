@@ -1,15 +1,21 @@
 package pageObjects;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import testbase.BaseTest;
 import utilities.CustomWaits;
 
 public class MyAccountPage extends BasePage{
+	public static int productCount;
 	
 	Actions actions = new Actions(driver);
 	
@@ -99,8 +105,110 @@ public class MyAccountPage extends BasePage{
 	public WebElement btnUpdateCart;
 	
 	
+	@FindBy(xpath="//ul[@class='nav navbar-nav']/li/a")
+	public List<WebElement> menuItems;
+	
+	By menuItemsLocator = By.xpath("//ul[@class='nav navbar-nav']/li/a");
+	
+	@FindBy(xpath="//a[text()='Components']/following-sibling::div/div/ul[@class='list-unstyled']/li")
+	public List<WebElement> desktopsMenuItems;
+	
+	
+	public List<WebElement> getListOfSubProducts(String productName) {
+	String xpath = "//a[text()='" + productName + "']/following-sibling::div/div/ul[@class='list-unstyled']/li/a";
+	return driver.findElements(By.xpath(xpath));
+	}
+	
+	@FindBy(xpath="//button[@data-original-title='Add to Wish List']")
+	public List<WebElement> btnAddToWishlist;
+	
+	//@FindBy(xpath="//a[@data-original-title='Remove']")
+	By btnRemoveFromWishlistLocator = By.xpath("//a[@data-original-title='Remove']");
+	
+	@FindBy(xpath="//a[@id='wishlist-total']")
+	public WebElement lnkWishlist;
+			
+	
+	public void addProductToWishlist() throws InterruptedException{
+		productCount = 0;
+		List<String> menuNames = new ArrayList<>();
 
+		for (WebElement menuItem : driver.findElements(menuItemsLocator)) {
+		    menuNames.add(menuItem.getText());
+		}
+		
+		for(String menu : menuNames) {
+		List<WebElement> menuItems = driver.findElements(menuItemsLocator);
+
+	    WebElement menuItem = menuItems.stream()
+	            .filter(item -> item.getText().equals(menu))
+	            .findFirst()
+	            .orElseThrow();
+			actions.moveToElement(menuItem).perform();
+			//String menu = menuItem.getText();
+			//System.out.println(menu);
+			if(getListOfSubProducts(menu).size() > 0) {
+				//System.out.println(getListOfSubProducts(menu).size());
+				Pattern pattern = Pattern.compile("\\((\\d+)\\)");
+				 for (WebElement option : getListOfSubProducts(menu)) {
+			            String text = option.getText();
+			            Matcher matcher = pattern.matcher(text);
+
+			            if (matcher.find()) {
+			                int number = Integer.parseInt(matcher.group(1));
+			                if (number > 0) {
+			                    option.click(); // Click the matching option
+			                    //System.out.println("Successfully selected: " + text);
+			                    for(WebElement wishlistButton : btnAddToWishlist) {
+			                    	CustomWaits.waitForTheElement(wishlistButton);
+			                    	wishlistButton.click();
+			                    //	System.out.println("Product added to wishlist successfully");
+			                    	productCount++;
+			                    	Thread.sleep(1000); // Wait for 2 seconds to allow the UI to update
+			                    }
+			                    break;
+			                }
+			            }
+			        }
+			}else {
+				menuItem.click();
+				 for(WebElement wishlistButton : btnAddToWishlist) {
+                 	CustomWaits.waitForTheElement(wishlistButton);
+                 	wishlistButton.click();
+                 	//System.out.println("Product added to wishlist successfully");
+                 	productCount++;
+                 	Thread.sleep(1000); // Wait for 2 seconds to allow the UI to update
+                 }
+			}
+		}
+
+	}
 	
+	public int getWishlistCount() {
+	    String wishlistText = lnkWishlist.getText(); // e.g., "Wish List (3)"
+	    Pattern pattern = Pattern.compile("\\((\\d+)\\)");
+	    Matcher matcher = pattern.matcher(wishlistText);
+	    if (matcher.find()) {
+	        return Integer.parseInt(matcher.group(1));
+	    }
+	    return 0; // Return 0 if no count is found
+	}
 	
+	public void removeAllProductsFromWishlist() {
+	    List<WebElement> removeButtons = driver.findElements(btnRemoveFromWishlistLocator);
+	    
+	    while (!removeButtons.isEmpty()) {
+	        // Always target the first element in the freshly located list
+	        WebElement removeButton = removeButtons.get(0);
+	        
+	        CustomWaits.waitForTheElement(removeButton);
+	        removeButton.click();
+	        //System.out.println("Product removed from wishlist successfully");
+
+
+	        // Fetch the updated list from the DOM
+	        removeButtons = driver.findElements(btnRemoveFromWishlistLocator);
+	    }
+	}
 
 }

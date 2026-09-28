@@ -11,8 +11,9 @@
   <parameter name="browser" value="chrome"></parameter>
     <classes>
      <!--  <class name="testCases.LoginTest"/>
-      <class name="testCases.AddToCartTestError"/> -->
-      <class name="testCases.VerifyCartPrice"/>
+      <class name="testCases.AddToCartTestError"/> 
+      <class name="testCases.VerifyCartPrice"/> -->
+      <class name="testCases.AddToWishlistFlow"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

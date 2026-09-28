@@ -66,6 +66,41 @@ public class MyAccountPage extends BasePage{
 	@FindBy(xpath="//div[contains(text(),'Products marked with *** are not available in the desired quantity or not in stock!')]")
 	public WebElement txtOutOfStockMessage;
 	
+	@FindBy(xpath="//p[contains(text(),'$122.00')]")
+	public WebElement txtProductPrice;
+	
+	@FindBy(xpath="(//table[@class='table table-bordered']//tbody/tr/td[last()])[last()]")
+	public WebElement txtCartProductPrice;
+	
+	
+	public String getProductPrice(WebElement priceElement) {
+		String price = (String) ((JavascriptExecutor) driver).executeScript(
+			    "return arguments[0].childNodes[0].textContent.trim();",
+			    priceElement
+			);
+		return price;
+	}
+	
+	@FindBy(xpath="//button[@class='btn btn-inverse btn-block btn-lg dropdown-toggle']")
+	public WebElement btnCartDropdown;
+	
+	@FindBy(xpath="//input[starts-with(@name,'quantity')]")
+	public WebElement txtCartQuantity;
+	
+	
+	public void setCartQuantity(WebElement ele, String quantity) {
+		
+		CustomWaits.waitForTheElement(ele);
+		ele.clear();
+		ele.sendKeys(quantity);
+	}
+	
+	@FindBy(xpath="//button[@data-original-title='Update']")
+	public WebElement btnUpdateCart;
+	
+	
+
+	
 	
 
 }

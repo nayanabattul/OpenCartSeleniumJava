@@ -41,8 +41,8 @@ public class BaseTest {
 		
 		p = new Properties();
 		
-		System.out.println("Resource URL: " +
-		        getClass().getClassLoader().getResource("config.properties"));
+//		System.out.println("Resource URL: " +
+//		        getClass().getClassLoader().getResource("config.properties"));
 
 	    try (InputStream input = getClass()
 	            .getClassLoader()
@@ -95,8 +95,8 @@ public class BaseTest {
 		getDriver().manage().window().maximize();
 		getDriver().manage().window().setSize(new Dimension(1920, 1080));
 		Dimension size = getDriver().manage().window().getSize();
-		System.out.println("Browser window size: " + size.getWidth() + "x" + size.getHeight());
-		Thread.sleep(10000);
+		//System.out.println("Browser window size: " + size.getWidth() + "x" + size.getHeight());
+		//Thread.sleep(10000);
 	}
 	
 	

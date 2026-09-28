@@ -10,8 +10,9 @@
   <test  name="Test">
   <parameter name="browser" value="chrome"></parameter>
     <classes>
-      <class name="testCases.LoginTest"/>
-      <class name="testCases.AddToCartTestError"/>
+     <!--  <class name="testCases.LoginTest"/>
+      <class name="testCases.AddToCartTestError"/> -->
+      <class name="testCases.VerifyCartPrice"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

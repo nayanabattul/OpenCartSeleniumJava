@@ -47,12 +47,12 @@ public class SlackUtil {
                         HttpResponse.BodyHandlers.ofString()
                     );
 
-            System.out.println(
-                "Slack response: "
-                + response.statusCode()
-                + " - "
-                + response.body()
-            );
+//            System.out.println(
+//                "Slack response: "
+//                + response.statusCode()
+//                + " - "
+//                + response.body()
+//            );
 
         } catch (Exception e) {
 
